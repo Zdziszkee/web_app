@@ -1,13 +1,20 @@
-import sqlite3 from "sqlite3";
-import { open, Database } from "sqlite";
+import { Kysely, SqliteDialect } from "kysely";
+import Database from "better-sqlite3";
 import config from "../config/config";
 
-// Open a database connection
-export const openDb = async (): Promise<
-  Database<sqlite3.Database, sqlite3.Statement>
-> => {
-  return open({
-    filename: config.dbFile,
-    driver: sqlite3.Database,
-  });
-};
+interface DatabaseSchema {
+  users: {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+  };
+}
+
+const database = new Kysely<DatabaseSchema>({
+  dialect: new SqliteDialect({
+    database: new Database(config.dbFile),
+  }),
+});
+
+export default database;
