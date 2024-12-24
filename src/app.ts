@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import userRoutes from "./routes/userRoutes";
 import path from "path";
+import { createUserController } from "./controllers/userController";
 
 const app = express();
 
@@ -17,5 +18,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", userRoutes);
 app.get("/login", (req, res) => res.render("loginView"));
 app.get("/register", (req, res) => res.render("registerView"));
-
+app.post("/register", createUserController);
 export default app;

@@ -106,6 +106,12 @@ html(lang="en")
         color: #357ab8;
         text-decoration: underline;
       }
+      .error-message {
+        color: #ff4d4d;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+      }
       /* Responsive Design */
       @media (max-width: 400px) {
         .register-container {
@@ -122,13 +128,15 @@ html(lang="en")
   body
     .register-container
       h2 Register
+      if error
+        p.error-message #{error}
       form(action="/register" method="POST")
         .form-group
           label(for="fullName") Full Name
-          input#fullName(type="text" name="fullName" placeholder="Your Full Name" required)
+          input#fullName(type="text" name="fullName" placeholder="Your Full Name" required value=fullName)
         .form-group
           label(for="email") Email Address
-          input#email(type="email" name="email" placeholder="your.email@example.com" required)
+          input#email(type="email" name="email" placeholder="your.email@example.com" required value=email)
         .form-group
           label(for="password") Password
           input#password(type="password" name="password" placeholder="••••••••" required)
