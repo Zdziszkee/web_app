@@ -1,0 +1,141 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Elegant Minimalistic Dark Mode Register
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    )
+    style.
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+      }
+      body {
+        background-color: #121212;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #ffffff;
+      }
+      .register-container {
+        background-color: #1e1e1e;
+        padding: 40px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        max-width: 360px;
+        width: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .register-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
+      }
+      .register-container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: #b0b0b0;
+      }
+      .form-group input {
+        padding: 12px 15px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background-color: #2c2c2c;
+        color: #ffffff;
+        font-size: 1rem;
+        transition: border 0.3s ease, background-color 0.3s ease;
+      }
+      .form-group input:focus {
+        border-color: #4a90e2;
+        background-color: #3a3a3a;
+        outline: none;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4a90e2;
+        border: none;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      button:hover {
+        background-color: #357ab8;
+        transform: translateY(-2px);
+      }
+      button:active {
+        background-color: #2c6691;
+        transform: translateY(0);
+      }
+      p.text-center {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #b0b0b0;
+      }
+      p.text-center a {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      p.text-center a:hover {
+        color: #357ab8;
+        text-decoration: underline;
+      }
+      /* Responsive Design */
+      @media (max-width: 400px) {
+        .register-container {
+          padding: 30px 20px;
+        }
+        .register-container h2 {
+          font-size: 1.8rem;
+        }
+        button {
+          padding: 10px;
+          font-size: 0.95rem;
+        }
+      }
+  body
+    .register-container
+      h2 Register
+      form(action="/register" method="POST")
+        .form-group
+          label(for="fullName") Full Name
+          input#fullName(type="text" name="fullName" placeholder="Your Full Name" required)
+        .form-group
+          label(for="email") Email Address
+          input#email(type="email" name="email" placeholder="your.email@example.com" required)
+        .form-group
+          label(for="password") Password
+          input#password(type="password" name="password" placeholder="••••••••" required)
+        .form-group
+          label(for="confirmPassword") Confirm Password
+          input#confirmPassword(type="password" name="confirmPassword" placeholder="••••••••" required)
+        button(type="submit") Register
+      p.text-center
+        | Already have an account?
+        a(href="/login") Login

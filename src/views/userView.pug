@@ -2,8 +2,38 @@ doctype html
 html
   head
     title Users
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      body {
+        background-color: #f8f9fa;
+      }
+      .user-list {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .user-list h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      .user-list ul {
+        list-style: none;
+        padding: 0;
+      }
+      .user-list li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      .user-list li:last-child {
+        border-bottom: none;
+      }
   body
-    h1 Users
-    ul
-      each user in users
-        li= user.name
+    .container
+      .user-list
+        h1 Users
+        ul
+          each user in users
+            li= user.name

@@ -1,5 +1,6 @@
 import app from "./app";
 import config from "./config/config";
+import "./utils/database"; // Ensure the database is initialized
 
 const port = config.port;
 
