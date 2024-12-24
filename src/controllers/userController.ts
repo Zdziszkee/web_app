@@ -1,36 +1,21 @@
 import { Request, Response } from "express";
-import { getUsers, createUser } from "../services/userService";
-
-/**
- * Renders the registration page.
- */
-export const getRegisterController = (req: Request, res: Response): void => {
-  res.render("registerView", { error: null, fullName: "", email: "" });
-};
+import { getUsers, registerUserService } from "../services/userService";
 
 /**
  * Handles user registration.
  */
-export const createUserController = async (
+export const registerUserController = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const { fullName, email, password, confirmPassword } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
 
   try {
-    await createUser({
-      name: fullName,
-      email,
-      password,
-    });
+    await registerUserService(name, email, password, confirmPassword);
     // Redirect to login page after successful registration
     res.redirect("/login");
   } catch (error: any) {
-    res.render("registerView", {
-      error: error.message || "An error occurred. Please try again.",
-      fullName,
-      email,
-    });
+    console.log("error");
   }
 };
 

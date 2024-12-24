@@ -1,7 +1,7 @@
 import {
   getUsers as getUsersRepo,
   createUser as createUserRepo,
-  findUserByEmailOrName as findUserRepo,
+  findUserByEmailOrName,
 } from "../repositories/userRepository";
 import { User } from "../models/userModel";
 import bcrypt from "bcrypt";
@@ -11,19 +11,25 @@ export const getUsers = async (): Promise<User[]> => {
   return await getUsersRepo();
 };
 
-export const createUser = async (user: Partial<User>): Promise<User> => {
+export const registerUserService = async (
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+): Promise<User> => {
   // Check if user with the same email or name exists
-  const existingUser = await findUserRepo(user.email, user.name);
+  const existingUser = await findUserByEmailOrName(email, name);
+
   if (existingUser) {
     throw new Error("An account with that email or username already exists.");
   }
 
   // Hash the password before saving
-  if (user.password) {
-    user.password = await hashPassword(user.password);
+  if (password) {
+    password = await hashPassword(password);
   }
 
-  return await createUserRepo(user as User);
+  return await createUserRepo(name, email, password);
 };
 
 // Function to hash password using bcrypt

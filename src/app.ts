@@ -2,8 +2,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import userRoutes from "./routes/userRoutes";
 import path from "path";
-import { createUserController } from "./controllers/userController";
-
+import { registerUserController } from "./controllers/userController";
+import {
+  registerFormsValidation,
+  registerMiddleware,
+} from "./middlewares/registerMiddleware";
 const app = express();
 
 // Set view engine
@@ -13,10 +16,10 @@ app.set("view engine", "pug");
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static("public"));
 // Routes
 app.use("/api", userRoutes);
 app.get("/login", (req, res) => res.render("loginView"));
 app.get("/register", (req, res) => res.render("registerView"));
-app.post("/register", createUserController);
+app.post("/register", registerUserController);
 export default app;

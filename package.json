@@ -15,7 +15,6 @@
     "@types/bcrypt": "^5.0.2",
     "@types/better-sqlite3": "^7.6.12",
     "@types/express": "^5.0.0",
-    "@types/express-validator": "^2.20.33",
     "@types/node": "^22.10.2",
     "@types/pg": "^8.11.10",
     "@types/pug": "^2.0.10",

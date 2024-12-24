@@ -1,24 +1,35 @@
 import database from "../utils/database";
 import { User } from "../models/userModel";
 import { ExpressionBuilder } from "kysely";
-
+import { DatabaseSchema } from "../utils/database";
 export const getUsers = async (): Promise<User[]> => {
   const users = await database.selectFrom("users").selectAll().execute();
   return users;
 };
-
-export const createUser = async (user: User): Promise<User> => {
+export const createUser = async (
+  name: string,
+  email: string,
+  password: string,
+): Promise<User> => {
   const result = await database
     .insertInto("users")
     .values({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
+      name: name,
+      email: email,
+      password: password,
     })
-    .returning(["id", "name", "email", "password"])
+    .returning("id")
     .executeTakeFirstOrThrow();
-  return result;
+  if (!result.id) {
+    throw new Error("Failed to insert user");
+  }
+  const user: User = {
+    id: result.id,
+    name: name,
+    email: email,
+    password: password,
+  };
+  return user;
 };
 
 export const findUserByEmailOrName = async (
