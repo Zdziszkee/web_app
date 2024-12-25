@@ -4,6 +4,7 @@
     padding: 0;
     font-family: "Montserrat", sans-serif;
 }
+
 body {
     background-color: #121212;
     display: flex;
@@ -12,6 +13,7 @@ body {
     height: 100vh;
     color: #ffffff;
 }
+
 .register-container {
     background-color: #1e1e1e;
     padding: 40px 30px;
@@ -23,10 +25,12 @@ body {
         transform 0.3s ease,
         box-shadow 0.3s ease;
 }
+
 .register-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
 }
+
 .register-container h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -34,33 +38,38 @@ body {
     font-weight: 700;
     color: #ffffff;
 }
+
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
+
 .form-group label {
     margin-bottom: 8px;
     font-weight: 500;
     font-size: 0.95rem;
     color: #b0b0b0;
 }
+
 .form-group input {
     padding: 12px 15px;
-    border: 1px solid #333;
+    border: 1px solid #333; /* Original border color */
     border-radius: 5px;
     background-color: #2c2c2c;
     color: #ffffff;
     font-size: 1rem;
     transition:
-        border 0.3s ease,
+        border-color 0.3s ease,
         background-color 0.3s ease;
 }
+
 .form-group input:focus {
     border-color: #4a90e2;
     background-color: #3a3a3a;
     outline: none;
 }
+
 button {
     width: 100%;
     padding: 12px;
@@ -75,41 +84,97 @@ button {
         background-color 0.3s ease,
         transform 0.2s ease;
 }
-button:hover {
+
+button[type="submit"]:disabled {
+    background-color: #ccc; /* Light gray background */
+    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+    opacity: 0.6; /* Reduced opacity for visual feedback */
+}
+
+button:hover:not(:disabled) {
     background-color: #357ab8;
     transform: translateY(-2px);
 }
-button:active {
+
+button:active:not(:disabled) {
     background-color: #2c6691;
     transform: translateY(0);
 }
+
 p.text-center {
     text-align: center;
     margin-top: 20px;
     font-size: 0.9rem;
     color: #b0b0b0;
 }
+
 p.text-center a {
     color: #4a90e2;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
+
 p.text-center a:hover {
     color: #357ab8;
     text-decoration: underline;
 }
-.error-message {
+
+/* -------------------------- */
+/*       Error Messages       */
+/* -------------------------- */
+
+/* Hide error messages by default */
+.error-message.hidden {
+    display: none;
+}
+
+/* Style for field-specific error messages */
+.form-group .error-message {
+    color: #ff4d4d; /* Red color for errors */
+    text-align: left; /* Align error messages to the left */
+    margin-top: 5px; /* Small margin above the error message */
+    margin-bottom: 0; /* Remove bottom margin to keep spacing consistent */
+    font-size: 0.85rem; /* Slightly smaller font size for error messages */
+    transition: opacity 0.3s ease; /* Smooth transition for appearance */
+    opacity: 0; /* Hidden by default, controlled via JavaScript */
+}
+
+.form-group .error-message:not(.hidden) {
+    opacity: 1;
+}
+
+/* Style for form-level error messages (e.g., server-side errors) */
+.register-container > .error-message {
     color: #ff4d4d;
     text-align: center;
     margin-bottom: 20px;
     font-size: 0.9rem;
 }
-input:not(:placeholder-shown):invalid {
-    border-color: red;
+
+/* -------------------------- */
+/*    Input Error Indication  */
+/* -------------------------- */
+
+/* Highlight input fields with red borders when there's an error */
+.input-error {
+    border-color: #ff4d4d; /* Red border to indicate error */
+    transition: border-color 0.3s ease; /* Smooth border color transition */
 }
 
-/* Responsive Design */
+/* Maintain red border on focus if there's an error */
+.input-error:focus {
+    border-color: #ff4d4d; /* Maintain red border on focus */
+    background-color: #3a3a3a; /* Optional: Slight background change */
+}
+
+.form-group .error-message:not(.hidden) {
+    opacity: 1;
+}
+
+/* -------------------------- */
+/*      Responsive Design      */
+/* -------------------------- */
 @media (max-width: 400px) {
     .register-container {
         padding: 30px 20px;

@@ -11,26 +11,30 @@ html(lang="en")
       rel="stylesheet"
     )
     link(rel="stylesheet" href="/css/registerView.css")
-    script(src="../scripts/registerValidation.js")
-    body
+    script(src="../scripts/registerView.js" defer)
+  body
     .register-container
       h2 Register
       if error
-        p.error-message #{error}
-      form(action="/register" method="POST")
+        p.error-message #{error} /* Form-level error message */
+      form(action="/register" method="POST" novalidate)
         .form-group
           label(for="name") Name
-          input#fullName(type="text" name="name" placeholder="Your Name" required minlength="3" value=name)
+          input#fullName(type="text" name="name" placeholder="Your Name")
+          p.error-message.hidden#fullName-error Name must be at least 3 characters.
         .form-group
           label(for="email") Email Address
-          input#email(type="email" name="email" placeholder="your.email@example.com" required value=email)
+          input#email(type="email" name="email" placeholder="your.email@example.com")
+          p.error-message.hidden#email-error Please enter a valid email address.
         .form-group
           label(for="password") Password
-          input#password(type="password" name="password" placeholder="••••••••" required minlength="8")
+          input#password(type="password" name="password" placeholder="••••••••")
+          p.error-message.hidden#password-error Password must be at least 8 characters.
         .form-group
           label(for="confirmPassword") Confirm Password
-          input#confirmPassword(type="password" name="confirmPassword" placeholder="••••••••" required minlength="8")
-        button(type="submit") Register
+          input#confirmPassword(type="password" name="confirmPassword" placeholder="••••••••")
+          p.error-message.hidden#confirmPassword-error Passwords do not match.
+        button(type="submit" disabled) Register
       p.text-center
         | Already have an account?
         a(href="/login") Login
