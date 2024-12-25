@@ -113,7 +113,6 @@ function showError(
   errorElement.classList.remove("hidden");
   input.classList.add("input-error");
 }
-
 function hideError(input: HTMLInputElement, errorElement: HTMLElement) {
   errorElement.textContent = "";
   errorElement.classList.add("hidden");
@@ -129,12 +128,14 @@ function validateInput(
 ): boolean {
   if (input.value.trim().length === 0) {
     hideError(input, errorElement);
+    input.classList.remove("input-error");
     return false;
   } else if (!validator()) {
     showError(input, errorElement, errorMessage);
     return false;
   } else {
     hideError(input, errorElement);
+    input.classList.remove("input-error");
     return true;
   }
 }

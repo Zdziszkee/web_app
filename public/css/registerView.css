@@ -157,15 +157,9 @@ p.text-center a:hover {
 /* -------------------------- */
 
 /* Highlight input fields with red borders when there's an error */
-.input-error {
+.form-group input.input-error {
     border-color: #ff4d4d; /* Red border to indicate error */
     transition: border-color 0.3s ease; /* Smooth border color transition */
-}
-
-/* Maintain red border on focus if there's an error */
-.input-error:focus {
-    border-color: #ff4d4d; /* Maintain red border on focus */
-    background-color: #3a3a3a; /* Optional: Slight background change */
 }
 
 .form-group .error-message:not(.hidden) {
