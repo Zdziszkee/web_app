@@ -11,95 +11,53 @@ document.addEventListener("DOMContentLoaded", () => {
     "button[type='submit']",
   ) as HTMLButtonElement;
 
-  // Regular expression for validating email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   // Initially disable the submit button
   submitButton.disabled = true;
 
-  const checkFormValidity = (): void => {
-    const isFullNameValid = validateFullName(
+  var isNameValid: boolean = false;
+  // Attach event listeners for real-time validation
+  fullNameInput.addEventListener("input", () => {
+    isNameValid = validateFullName(
       fullNameInput,
       fullNameInput.nextElementSibling as HTMLElement,
     );
-    const isEmailValid = validateEmail(
+  });
+
+  var isEmailValid: boolean = false;
+  emailInput.addEventListener("input", () => {
+    isEmailValid = validateEmail(
       emailInput,
       emailInput.nextElementSibling as HTMLElement,
     );
-    const isPasswordValid = validatePassword(
+  });
+
+  var isPasswordValid: boolean = false;
+  passwordInput.addEventListener("input", () => {
+    isPasswordValid = validatePassword(
       passwordInput,
       passwordInput.nextElementSibling as HTMLElement,
     );
-    const isConfirmPasswordValid = validateConfirmPassword(
+  });
+
+  var isConfirmPasswordValid: boolean = false;
+  confirmPasswordInput.addEventListener("input", () => {
+    isConfirmPasswordValid = validateConfirmPassword(
       confirmPasswordInput,
       confirmPasswordInput.nextElementSibling as HTMLElement,
       passwordInput,
     );
+  });
 
-    // Enable the submit button only if all validations pass
-    submitButton.disabled = !(
-      isFullNameValid &&
-      isEmailValid &&
+  document.addEventListener("input", () => {
+    if (
+      isConfirmPasswordValid &&
       isPasswordValid &&
-      isConfirmPasswordValid
-    );
-  };
-
-  // Event Handlers
-  const handleInput = () => {
-    checkFormValidity();
-  };
-
-  // Attach event listeners for real-time validation
-  fullNameInput.addEventListener("input", handleInput);
-  emailInput.addEventListener("input", handleInput);
-  passwordInput.addEventListener("input", handleInput);
-  confirmPasswordInput.addEventListener("input", handleInput);
-
-  // Prevent form submission if validations fail
-  form.addEventListener("submit", (event) => {
-    const isFormValid =
-      validateFullName(
-        fullNameInput,
-        fullNameInput.nextElementSibling as HTMLElement,
-      ) &&
-      validateEmail(emailInput, emailInput.nextElementSibling as HTMLElement) &&
-      validatePassword(
-        passwordInput,
-        passwordInput.nextElementSibling as HTMLElement,
-      ) &&
-      validateConfirmPassword(
-        confirmPasswordInput,
-        confirmPasswordInput.nextElementSibling as HTMLElement,
-        passwordInput,
-      );
-
-    if (!isFormValid) {
-      event.preventDefault();
-      checkFormValidity();
-
-      // Focus the first invalid input
-      if (
-        !validateFullName(
-          fullNameInput,
-          fullNameInput.nextElementSibling as HTMLElement,
-        )
-      ) {
-        fullNameInput.focus();
-      } else if (
-        !validateEmail(emailInput, emailInput.nextElementSibling as HTMLElement)
-      ) {
-        emailInput.focus();
-      } else if (
-        !validatePassword(
-          passwordInput,
-          passwordInput.nextElementSibling as HTMLElement,
-        )
-      ) {
-        passwordInput.focus();
-      } else {
-        confirmPasswordInput.focus();
-      }
+      isEmailValid &&
+      isNameValid
+    ) {
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
     }
   });
 });
