@@ -9,6 +9,7 @@ import {
   Selectable,
   Updateable,
 } from "kysely";
+
 export interface DatabaseSchema {
   users: UserTable;
 }

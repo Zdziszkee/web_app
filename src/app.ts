@@ -17,6 +17,7 @@ app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use("/scripts", express.static(path.join(__dirname, "../dist/scripts")));
 // Routes
 app.use("/api", userRoutes);
 app.get("/login", (req, res) => res.render("loginView"));
