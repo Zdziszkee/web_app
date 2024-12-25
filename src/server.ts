@@ -5,5 +5,5 @@ import "./utils/database"; // Ensure the database is initialized
 const port = config.port;
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });

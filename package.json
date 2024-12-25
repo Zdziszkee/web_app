@@ -1,17 +1,31 @@
 {
   "name": "web_app",
   "version": "1.0.0",
+  "type": "commonjs",
   "main": "dist/app.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "dev": "concurrently \"tsc --watch\" \"nodemon --exec ts-node src/server.ts\""
+    "build": "tsc && parcel build dist/scripts/registerView.js --dist-dir dist/scripts --target registerView",
+    "start": "ts-node src/server.ts",
+    "dev": "tsc && parcel build dist/scripts/registerView.js --dist-dir dist/scripts --target registerView && nodemon --exec ts-node src/server.ts",
+    "bundle": "parcel build dist/scripts/registerView.js --dist-dir dist/scripts --target registerView"
+  },
+  "targets": {
+    "registerView": {
+      "distDir": "dist/scripts",
+      "sourceMap": false,
+      "publicUrl": "./",
+      "engines": {
+        "browsers": "> 0.25%, not dead"
+      },
+      "outputFormat": "global"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@parcel/transformer-pug": "^2.13.3",
     "@types/bcrypt": "^5.0.2",
     "@types/better-sqlite3": "^7.6.12",
     "@types/express": "^5.0.0",
@@ -19,10 +33,22 @@
     "@types/pg": "^8.11.10",
     "@types/pug": "^2.0.10",
     "@types/sqlite3": "^3.1.11",
+    "assert": "^2.1.0",
+    "browserify-zlib": "^0.2.0",
     "concurrently": "^9.1.0",
+    "crypto-browserify": "^3.12.1",
+    "events": "^3.3.0",
+    "https-browserify": "^1.0.0",
     "nodemon": "^3.1.9",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "url": "^0.11.4",
+    "util": "^0.12.5"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -32,6 +58,7 @@
     "express": "^4.21.2",
     "express-validator": "^7.2.0",
     "kysely": "^0.27.5",
+    "parcel": "^2.13.3",
     "pg": "^8.13.1",
     "pug": "^3.0.3",
     "winston": "^3.17.0"

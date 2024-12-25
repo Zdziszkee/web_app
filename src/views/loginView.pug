@@ -1,31 +1,31 @@
 doctype html
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Elegant Minimalistic Dark Mode Login
-    link(rel="preconnect" href="https://fonts.googleapis.com")
-    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
-    link(
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    )
-    link(rel="stylesheet" href="/css/loginView.css")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Elegant Minimalistic Dark Mode Login
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        )
+        link(rel="stylesheet" href="/css/loginView.css")
 
-  body
-    .login-container
-      h2 Login
-      form(action="/login" method="POST")
-        .form-group
-          label(for="email") Email Address
-          input#email(type="email" name="email" placeholder="your.email@example.com" required)
-        .form-group
-          label(for="password") Password
-          input#password(type="password" name="password" placeholder="••••••••" required)
-        .form-check
-          input#remember(type="checkbox" name="remember")
-          label(for="remember") Remember Me
-        button(type="submit") Login
-      p.text-center
-        | Don't have an account?
-        a(href="/register") Register
+    body
+        .login-container
+            h2 Login
+            form(action="/login" method="POST")
+                .form-group
+                    label(for="email") Email Address
+                    input#email(type="email" name="email" placeholder="your.email@example.com" required)
+                .form-group
+                    label(for="password") Password
+                    input#password(type="password" name="password" placeholder="••••••••" required)
+                .form-check
+                    input#remember(type="checkbox" name="remember")
+                    label(for="remember") Remember Me
+                button(type="submit") Login
+            p.text-center
+                | Don't have an account?
+                a(href="/register") Register

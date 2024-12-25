@@ -1,12 +1,12 @@
-import { createLogger, format, transports } from "winston";
+import {createLogger, format, transports} from "winston";
 
 const logger = createLogger({
-  level: "info",
-  format: format.json(),
-  transports: [
-    new transports.Console(),
-    new transports.File({ filename: "combined.log" }),
-  ],
+    level: "info",
+    format: format.json(),
+    transports: [
+        new transports.Console(),
+        new transports.File({filename: "combined.log"}),
+    ],
 });
 
 export default logger;
