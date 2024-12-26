@@ -115,6 +115,54 @@ p.text-center a:hover {
     color: #357ab8;
     text-decoration: underline;
 }
+.error-message.hidden {
+    display: none;
+}
+
+
+
+/* Hide error messages by default */
+.error-message.hidden {
+    display: none;
+}
+
+/* Style for field-specific error messages */
+.form-group .error-message {
+    color: #ff4d4d; /* Red color for errors */
+    text-align: left; /* Align error messages to the left */
+    margin-top: 5px; /* Small margin above the error message */
+    margin-bottom: 0; /* Remove bottom margin to keep spacing consistent */
+    font-size: 0.85rem; /* Slightly smaller font size for error messages */
+    transition: opacity 0.3s ease; /* Smooth transition for appearance */
+    opacity: 0; /* Hidden by default, controlled via JavaScript */
+}
+
+.form-group .error-message:not(.hidden) {
+    opacity: 1;
+}
+
+/* Style for form-level error messages (e.g., server-side errors) */
+.login-container > .error-message {
+    color: #ff4d4d;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+/* -------------------------- */
+/*    Input Error Indication  */
+/* -------------------------- */
+
+/* Highlight input fields with red borders when there's an error */
+.form-group input.input-error {
+    border-color: #ff4d4d; /* Red border to indicate error */
+    transition: border-color 0.3s ease; /* Smooth border color transition */
+}
+
+.form-group .error-message:not(.hidden) {
+    opacity: 1;
+}
+
 /* Responsive Design */
 @media (max-width: 400px) {
     .login-container {

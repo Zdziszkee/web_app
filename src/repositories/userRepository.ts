@@ -28,7 +28,15 @@ export const createUser = async (
         password: password,
     };
 };
-
+export const findUserByEmail = async (
+    email: string,
+): Promise<User | null> => {
+    const user = await database.selectFrom("users")
+        .selectAll()
+        .where('email', '=', email)
+        .executeTakeFirst();
+    return user || null;
+}
 export const findUserByEmailOrName = async (
     email: string,
     name: string,

@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
-import {registerUserController} from "./controllers/userController";
+import {loginUserController, registerUserController} from "./controllers/userController";
 
 const app = express();
 
@@ -18,4 +18,5 @@ app.use("/scripts", express.static(path.join(__dirname, "../dist/scripts")));
 app.get("/login", (req, res) => res.render("loginView"));
 app.get("/register", (req, res) => res.render("registerView"));
 app.post("/register", registerUserController);
+app.post("/login", loginUserController);
 export default app;

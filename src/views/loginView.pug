@@ -11,17 +11,20 @@ html(lang="en")
             rel="stylesheet"
         )
         link(rel="stylesheet" href="/css/loginView.css")
+        script(src="../scripts/loginView.js" defer)
 
     body
         .login-container
             h2 Login
-            form(action="/login" method="POST")
+            form(action="/login" method="POST" novalidate)
                 .form-group
                     label(for="email") Email Address
                     input#email(type="email" name="email" placeholder="your.email@example.com" required)
+                    p.error-message.hidden#name-error
                 .form-group
                     label(for="password") Password
                     input#password(type="password" name="password" placeholder="••••••••" required)
+                    p.error-message.hidden#password-error
                 .form-check
                     input#remember(type="checkbox" name="remember")
                     label(for="remember") Remember Me

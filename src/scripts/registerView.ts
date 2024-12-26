@@ -1,4 +1,4 @@
-import {RegisterUserResult} from "../services/userService";
+import {UserQueryResult} from "../services/userService";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form") as HTMLFormElement;
@@ -62,15 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formDataObject),
+                body: JSON.stringify({formDataObject}),
             });
 
             console.log("Response status:", response.status);
 
-            const result: RegisterUserResult = await response.json();
+            const result: UserQueryResult = await response.json();
 
             if (!result.success) {
-                console.error("Error response:", result);
                 showError(nameInput, nameInput.nextElementSibling as HTMLElement, result.message);
                 return;
             }
