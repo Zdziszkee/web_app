@@ -4,10 +4,8 @@
   "type": "commonjs",
   "main": "dist/app.js",
   "scripts": {
-    "build": "tsc && parcel build dist/scripts/registerView.js --dist-dir dist/scripts --target registerView",
     "start": "ts-node src/server.ts",
-    "dev": "tsc && parcel build dist/scripts/registerView.js --dist-dir dist/scripts --target registerView && nodemon --exec ts-node src/server.ts",
-    "bundle": "parcel build dist/scripts/registerView.js --target registerView"
+    "dev": "tsc && parcel build src/scripts/registerView.ts --target registerView && nodemon --exec ts-node src/server.ts"
   },
   "targets": {
     "registerView": {

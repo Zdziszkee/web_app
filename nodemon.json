@@ -1,5 +1,5 @@
 {
   "watch": ["src"],
   "ext": "ts",
-  "exec": "ts-node src/server.ts & parcel build dist/scripts/registerView.js"
+  "exec": "parcel build src/scripts/registerView.ts & ts-node src/server.ts & "
 }
