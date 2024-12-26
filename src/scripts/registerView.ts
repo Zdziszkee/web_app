@@ -17,40 +17,28 @@ document.addEventListener("DOMContentLoaded", () => {
     submitButton.disabled = true;
 
     let isNameValid: boolean = false;
-    // Attach event listeners for real-time validation
-    nameInput.addEventListener("input", () => {
+    let isEmailValid: boolean = false;
+    let isPasswordValid: boolean = false;
+    let isConfirmPasswordValid: boolean = false;
+
+    document.addEventListener("input", () => {
         isNameValid = validateName(
             nameInput,
             nameInput.nextElementSibling as HTMLElement,
         );
-    });
-
-    let isEmailValid: boolean = false;
-    emailInput.addEventListener("input", () => {
-        isEmailValid = validateEmail(
-            emailInput,
-            emailInput.nextElementSibling as HTMLElement,
-        );
-    });
-
-    let isPasswordValid: boolean = false;
-    passwordInput.addEventListener("input", () => {
         isPasswordValid = validatePassword(
             passwordInput,
             passwordInput.nextElementSibling as HTMLElement,
         );
-    });
-
-    let isConfirmPasswordValid: boolean = false;
-    confirmPasswordInput.addEventListener("input", () => {
+        isEmailValid = validateEmail(
+            emailInput,
+            emailInput.nextElementSibling as HTMLElement,
+        );
         isConfirmPasswordValid = validateConfirmPassword(
             confirmPasswordInput,
             confirmPasswordInput.nextElementSibling as HTMLElement,
             passwordInput,
         );
-    });
-
-    document.addEventListener("input", () => {
         submitButton.disabled = !(isConfirmPasswordValid &&
             isPasswordValid &&
             isEmailValid &&
