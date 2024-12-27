@@ -1,0 +1,36 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Notes App
+        link(rel="stylesheet", href="/css/mainView.css")
+    body
+        header
+            h1 Notes App
+        main
+            section#notesGrid
+                //- Add Note Card
+                div.add-note-card
+                    span.add-icon +
+                    p Add a new note
+                //- Notes will be dynamically inserted here
+        // Modal for Adding/Editing Notes
+        div#noteModal.modal
+            div.modal-content
+                span.close-btn &times;
+                form#noteForm
+                    input(type="hidden", id="noteId")
+                    div
+                        label(for="noteTitle") Title:
+                        input(type="text", id="noteTitle", required=true)
+                    div
+                        label(for="noteContent") Content:
+                        textarea(id="noteContent", rows="10", required=true)
+                    button(type="submit") Save
+        // Modal for Viewing Note
+        div#viewModal.modal
+            div.modal-content
+                span.close-btn &times;
+                h2#viewTitle
+                p#viewContent
+        script(src="/scripts/mainView.js")

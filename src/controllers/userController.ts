@@ -29,9 +29,15 @@ export const loginUserController = async (
             httpOnly: true,
             secure: true, // Use HTTPS
             sameSite: 'strict',
+            path: '/', // Ensure the cookie is sent for all paths
+        });
+        res.status(200).json(loginUserResult);
+    } else {
+        res.status(400).json({
+            success: false,
+            message: 'Failed to login or missing token',
         });
     }
-    res.status(200).json(loginUserResult)
 }
 /**
  * Renders the user list page.

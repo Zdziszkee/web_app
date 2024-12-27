@@ -1,8 +1,8 @@
-interface User {
-    id: number;
+interface UserModel {
+    userId: number;
     name: string;
     email: string;
-    password: string;
+    hashedPassword: string;
 }
 
-export {User};
+export {UserModel};

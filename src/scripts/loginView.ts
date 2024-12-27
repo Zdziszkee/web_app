@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formDataObject),
+                credentials: "include", // Include cookies with the request
             });
 
             console.log("Response status:", response.status);

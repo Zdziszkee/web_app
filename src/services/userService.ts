@@ -4,11 +4,11 @@ import {
     findUserByEmailOrName,
     getUsers as getUsersRepo,
 } from "../repositories/userRepository";
-import {User} from "../models/userModel";
+import {UserModel} from "../models/userModel";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const getUsers = async (): Promise<User[]> => {
+export const getUsers = async (): Promise<UserModel[]> => {
     // Additional business logic can be added here
     return await getUsersRepo();
 };
@@ -30,7 +30,7 @@ export const loginUserService = async (email: string, password: string): Promise
     if (!user) {
         return [{success: false, message: "User with that email does not exist!"},null];
     }
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.hashedPassword);
 
     if (!passwordMatch) {
         return [{success: false, message: "Password provided is wrong!"},null];
@@ -41,7 +41,7 @@ export const loginUserService = async (email: string, password: string): Promise
         throw new Error("JWT_SECRET_KEY is missing in environment variable!");
     }
 
-    const token = jwt.sign({userId: user.id}, SECRET_KEY, {
+    const token = jwt.sign({userId: user.userId}, SECRET_KEY, {
         expiresIn: '1h',
     });
     return [{success: true, message: "Successfully logged in!"},token];
@@ -67,13 +67,7 @@ export const registerUserService = async (
         }
     }
 
-    password = await hashPassword(password);
+    password = await bcrypt.hash(password, 10);
     const createdUser = await createUser(name, email, password);
     return {success: true, message: `User created successfully. ${createdUser}`};
-};
-
-// Function to hash password using bcrypt
-const hashPassword = async (password: string): Promise<string> => {
-    const saltRounds = 10;
-    return await bcrypt.hash(password, saltRounds);
 };

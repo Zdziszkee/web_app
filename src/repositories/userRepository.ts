@@ -1,36 +1,36 @@
 import database from "../utils/database";
-import {User} from "../models/userModel";
+import {UserModel} from "../models/userModel";
 
-export const getUsers = async (): Promise<User[]> => {
+export const getUsers = async (): Promise<UserModel[]> => {
     return await database.selectFrom("users").selectAll().execute();
 };
 export const createUser = async (
     name: string,
     email: string,
     password: string,
-): Promise<User> => {
+): Promise<UserModel> => {
     const result = await database
         .insertInto("users")
         .values({
             name: name,
             email: email,
-            password: password,
+            hashedPassword: password,
         })
-        .returning("id")
+        .returning("userId")
         .executeTakeFirstOrThrow();
-    if (!result.id) {
+    if (!result.userId) {
         throw new Error(`Failed to insert user: ${name} ${email} ${password}`);
     }
     return {
-        id: result.id,
+        userId: result.userId,
         name: name,
         email: email,
-        password: password,
+        hashedPassword: password,
     };
 };
 export const findUserByEmail = async (
     email: string,
-): Promise<User | null> => {
+): Promise<UserModel | null> => {
     const user = await database.selectFrom("users")
         .selectAll()
         .where('email', '=', email)
@@ -40,7 +40,7 @@ export const findUserByEmail = async (
 export const findUserByEmailOrName = async (
     email: string,
     name: string,
-): Promise<User | null> => {
+): Promise<UserModel | null> => {
     const user = await database
         .selectFrom("users")
         .selectAll()
