@@ -12,11 +12,8 @@ export const registerUserController = async (
 
     const registerUserResult = await registerUserService(name, email, password);
 
-    if (registerUserResult.success) {
-        res.json(registerUserResult).redirect("/login");
-    }else{
-        res.status(200).json(registerUserResult);
-    }
+    res.status(200).json(registerUserResult);
+
 };
 
 export const loginUserController = async (
