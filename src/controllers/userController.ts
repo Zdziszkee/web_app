@@ -11,13 +11,10 @@ export const registerUserController = async (
     const {name, email, password} = req.body;
 
     const registerUserResult = await registerUserService(name, email, password);
-
+    res.status(200).json(registerUserResult);
     if (registerUserResult.success) {
         res.redirect("/login");
-    } else {
-        res.status(200).json(registerUserResult);
     }
-
 };
 
 export const loginUserController = async (
@@ -27,7 +24,6 @@ export const loginUserController = async (
     const {email, password} = req.body;
     const [loginUserResult, token] = await loginUserService(email, password);
 
-    res.status(200).json(loginUserResult)
 
     if (loginUserResult.success && token) {
         res.cookie('token', token, {
@@ -36,6 +32,7 @@ export const loginUserController = async (
             sameSite: 'strict',
         });
     }
+    res.status(200).json(loginUserResult)
 }
 /**
  * Renders the user list page.

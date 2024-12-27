@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({formDataObject}),
+                body: JSON.stringify(formDataObject),
             });
 
             console.log("Response status:", response.status);
